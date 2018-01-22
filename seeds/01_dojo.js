@@ -37,7 +37,7 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 5,
-          dojo: " Colorado Ninja Dojo",
+          dojo: "Colorado Ninja Dojo",
           style: "Ninjutsu",
           url: "http://www.coloradoninjutsu.com/",
           latitude: 39.608913,
