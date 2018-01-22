@@ -20,6 +20,15 @@ app.get("/", (request, response) => {
     .catch(console.error);
 });
 
+app.get("/style", (request, response) => {
+  queries
+    .list("style")
+    .then(towerDB => {
+      response.json({ towerDB });
+    })
+    .catch(console.error);
+});
+
 app.get("/dojo", (request, response) => {
   queries
     .list("dojo")
