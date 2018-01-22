@@ -4,9 +4,6 @@ module.exports = {
   list(path) {
     return database(path).select();
   },
-  list2(path) {
-    return database(path).select();
-  },
   read(id, path) {
     return database(path)
       .select()
@@ -30,5 +27,5 @@ module.exports = {
     return database(path)
       .delete()
       .where("id", id);
-  }
+  },
 };
