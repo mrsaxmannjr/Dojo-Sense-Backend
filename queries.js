@@ -1,30 +1,33 @@
 const database = require("./database-connection");
 
 module.exports = {
-  list() {
-    return database("style").select();
+  list(path) {
+    return database(path).select();
   },
-  read(id) {
-    return database("style")
+  list2(path) {
+    return database(path).select();
+  },
+  read(id, path) {
+    return database(path)
       .select()
       .where("id", id)
       .first();
   },
-  create(style) {
-    return database("style")
-      .insert(style)
+  create(body, path) {
+    return database(path)
+      .insert(body)
       .returning("*")
       .then(record => record[0]);
   },
-  update(id, style) {
-    return database("style")
-      .update(style)
+  update(id, body, path) {
+    return database(path)
+      .update(body)
       .where("id", id)
       .returning("*")
       .then(record => record[0]);
   },
-  delete(id) {
-    return database("style")
+  delete(id, path) {
+    return database(path)
       .delete()
       .where("id", id);
   }

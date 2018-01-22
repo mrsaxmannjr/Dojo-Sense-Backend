@@ -1,75 +1,98 @@
 const express = require("express");
 const queries = require("./queries");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors);
 app.use(bodyParser.json());
 
-app.get("/towerDB", (request, response) => {
+app.get("/", (request, response) => {
   queries
-    .list()
+    .list("style")
+    .then(style =>
+      queries.list("dojo").then(dojo =>
+        response.json({
+          style,
+          dojo,
+        })))
+    .catch(console.error);
+});
+
+app.get("/dojo", (request, response) => {
+  queries
+    .list("dojo")
     .then(towerDB => {
       response.json({ towerDB });
     })
     .catch(console.error);
 });
 
-app.get("/towerDB/:id", (request, response) => {
+app.get("/style/:id", (request, response) => {
   queries
-    .read(request.params.id)
+    .read(request.params.id, "style")
     .then(style => {
       style ? response.json({ style }) : response.sendStatus(404);
     })
     .catch(console.error);
 });
 
-app.get("/towerDB/:id", (request, response) => {
+app.get("/dojo/:id", (request, response) => {
   queries
-    .read(request.params.id)
+    .read(request.params.id, "dojo")
     .then(dojo => {
       dojo ? response.json({ dojo }) : response.sendStatus(404);
     })
     .catch(console.error);
 });
 
-app.post("/towerDB", (request, response) => {
+app.post("/style", (request, response) => {
   queries
-    .create(request.body)
+    .create(request.body, "style")
     .then(style => {
       response.status(201).json({ style });
     })
     .catch(console.error);
 });
 
-app.post("/towerDB", (request, response) => {
+app.post("/dojo", (request, response) => {
   queries
-    .create(request.body)
+    .create(request.body, "dojo")
     .then(dojo => {
       response.status(201).json({ dojo });
     })
     .catch(console.error);
 });
 
-app.delete("/towerDB/:id", (request, response) => {
+app.delete("/style/:id", (request, response) => {
   queries
-    .delete(request.params.id)
+    .delete(request.params.id, "style")
     .then(() => {
       response.sendStatus(204);
     })
     .catch(console.error);
 });
 
-app.put("/towerDB/:id", (request, response) => {
+app.delete("/dojo/:id", (request, response) => {
   queries
-    .update(request.params.id, request.body)
+    .delete(request.params.id, "dojo")
+    .then(() => {
+      response.sendStatus(204);
+    })
+    .catch(console.error);
+});
+
+app.put("/style/:id", (request, response) => {
+  queries
+    .update(request.params.id, request.body, "style")
     .then(style => {
       response.json({ style });
     })
     .catch(console.error);
 });
 
-app.put("/towerDB/:id", (request, response) => {
+app.put("/dojo/:id", (request, response) => {
   queries
     .update(request.params.id, request.body)
     .then(dojo => {
