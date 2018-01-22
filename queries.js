@@ -2,29 +2,29 @@ const database = require("./database-connection");
 
 module.exports = {
   list() {
-    return database("dojo").select();
+    return database("style").select();
   },
   read(id) {
-    return database("dojo")
+    return database("style")
       .select()
       .where("id", id)
       .first();
   },
-  create(dojo) {
-    return database("dojo")
-      .insert(dojo)
+  create(style) {
+    return database("style")
+      .insert(style)
       .returning("*")
       .then(record => record[0]);
   },
-  update(id, dojo) {
-    return database("dojo")
-      .update(dojo)
+  update(id, style) {
+    return database("style")
+      .update(style)
       .where("id", id)
       .returning("*")
       .then(record => record[0]);
   },
   delete(id) {
-    return database("dojo")
+    return database("style")
       .delete()
       .where("id", id);
   }
