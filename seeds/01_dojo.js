@@ -22,7 +22,7 @@ exports.seed = function(knex, Promise) {
         {
           id: 3,
           dojo: "Denver Wing Chun",
-          style: "Wing Chun",
+          style: "Wing-Chun",
           url: "http://www.denverwingchun.com/",
           latitude: 39.677822,
           longitude: -104.921636
