@@ -103,7 +103,7 @@ app.put("/style/:id", (request, response) => {
 
 app.put("/dojo/:id", (request, response) => {
   queries
-    .update(request.params.id, request.body)
+    .update(request.params.id, request.body, "dojo")
     .then(dojo => {
       response.json({ dojo });
     })

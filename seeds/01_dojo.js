@@ -1,6 +1,6 @@
 exports.seed = function(knex, Promise) {
   return knex("dojo")
-    .del()
+    .del() 
     .then(function() {
       return knex("dojo").insert([
         {
