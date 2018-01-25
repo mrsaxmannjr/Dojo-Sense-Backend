@@ -8,7 +8,7 @@ module.exports = {
     return database(path)
       .select()
       .where("id", id)
-      .first();
+      // .first();
   },
   create(body, path) {
     return database(path)
